@@ -1,5 +1,6 @@
 import { Outfit } from "next/font/google"; /*adding outfit font from google fonts*/
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs/dist/types/components.server";
 
 
 export const metadata = {
@@ -12,6 +13,7 @@ const outfit=Outfit({subsets:['latin']})
 
 export default function RootLayout({ children }) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body
         className={outfit.className} /*changed className*/
@@ -19,5 +21,6 @@ export default function RootLayout({ children }) {
         {children}
       </body>
     </html>
+    </ClerkProvider>
   );
 }
