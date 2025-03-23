@@ -1,4 +1,4 @@
-# AI Interior Design Generator
+# DesignGenie
 
 An AI-powered full-stack web application that allows users to generate and visualize stunning interior designs based on their preferences. Built with Next.js, Neon Postgres SQL Database, Drizzle ORM, and Clerk Authentication, this app provides an intuitive user experience for creating, customizing, and managing AI-generated interiors.
 
