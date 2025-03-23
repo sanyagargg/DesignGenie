@@ -25,7 +25,9 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/react": "19.0.12",
     "drizzle-kit": "^0.30.5",
-    "tailwindcss": "^4"
+    "tailwindcss": "^4",
+    "typescript": "5.8.2"
   }
 }
