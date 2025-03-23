@@ -1,6 +1,8 @@
 import { Outfit } from "next/font/google"; /*adding outfit font from google fonts*/
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import Provider from "./provider"; // ✅ Correct path for files inside `app/`
+
 
 
 export const metadata = {
@@ -19,7 +21,7 @@ export default function RootLayout({ children }) {
         className={outfit.className} /*changed className*/
       >
         <Provider>
-        {children}
+          {children}
         </Provider>
       </body>
     </html>
