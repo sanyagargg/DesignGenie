@@ -1,6 +1,6 @@
 import { Outfit } from "next/font/google"; /*adding outfit font from google fonts*/
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs/dist/types/components.server";
+import { ClerkProvider } from "@clerk/nextjs";
 
 
 export const metadata = {
