@@ -18,7 +18,9 @@ export default function RootLayout({ children }) {
       <body
         className={outfit.className} /*changed className*/
       >
+        <Provider>
         {children}
+        </Provider>
       </body>
     </html>
     </ClerkProvider>
