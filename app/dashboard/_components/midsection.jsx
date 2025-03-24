@@ -17,18 +17,13 @@ function MidSection() {
         <div className="px-6 pt-14 lg:px-8">
           {/* 🔹 Header Section */}
           <div className="py-2">
-            <div className="flex justify-between items-start mb-16">
+            <div className="justify-between items-start mb-16">
               {/* Display user name */}
-              <div className="text-left">
+              <div className="text-center mb-16">
                 <h1 className="text-4xl font-bold text-blue-800">
                   Welcome, {user?.firstName}
                 </h1>
               </div>
-              
-              {/* Button to redesign a room */}
-              <Button className="bg-blue-600 hover:bg-blue-500 text-white">
-                + Redesign Room
-              </Button>
             </div>
 
             {/* 🔹 Conditional Rendering for Empty State or Room Listing */}
