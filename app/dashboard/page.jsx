@@ -1,9 +1,10 @@
-import { UserButton } from '@clerk/nextjs'
 import React from 'react'
+import MidSection from './_components/midsection'
 
 function dashboard() {
   return (
     <div>
+      <MidSection/>
     </div>
   )
 }
