@@ -10,8 +10,13 @@ function Header() {
             <h2 className='font-bold text-lg text-blue-700'>DesignGenie</h2>
         </div>
 
-        <div>
-            <UserButton/>
+        
+        <div className= 'flex gap-10 items-center'>
+            <div className= 'flex gap-2 p-1 items-center bg-slate-100 px-3 rounded-full'>
+                <Image src = {'/star.svg'} width = {20} height = {20} alt="Credits" />
+                <h3>3</h3>
+            </div>
+                <UserButton/>
         </div>
     </div>
   )
