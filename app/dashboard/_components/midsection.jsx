@@ -1,36 +1,50 @@
-"use client"
+"use client"; // Required for client-side rendering
 import { Button } from '../../../components/ui/button';
-import { useUser } from '@clerk/nextjs'
-import React, { useState } from 'react'
+import { useUser } from '@clerk/nextjs';
+import React, { useState } from 'react';
 import EmptyState from './EmptyState';
+import Layout from './layout'; // Import the new Layout component
 
 function MidSection() {
-    // Get user details
+    // Get logged-in user details using Clerk's useUser hook
     const { user } = useUser();
     
-    // State to store user-designed rooms
-    const [userRoomList, setUserRoomList] = useState([]);
+    // State to manage the list of user-created room designs
+    const [userRoomList] = useState([]); // Currently empty, will be used for listing designs later
 
     return (
-        <div>
-            <div className='flex items-center justify-between'>
-                <h2 className='font-bold text-3xl'>Hello, {user?.firstName} {user?.lastName}</h2>
-                <Button className="bg-blue-700 text-white hover:bg-blue-500">+ Redesign Room</Button>
+      <Layout> {/* Wrap everything inside the Layout component for background effect */}
+        <div className="px-6 pt-14 lg:px-8">
+          {/* 🔹 Header Section */}
+          <div className="py-2">
+            <div className="flex justify-between items-start mb-16">
+              {/* Display user name */}
+              <div className="text-left">
+                <h1 className="text-4xl font-bold text-blue-800">
+                  Welcome, {user?.firstName}
+                </h1>
+              </div>
+              
+              {/* Button to redesign a room */}
+              <Button className="bg-blue-600 hover:bg-blue-500 text-white">
+                + Redesign Room
+              </Button>
             </div>
 
-            {/* Empty state when userRoomList is empty */}
+            {/* 🔹 Conditional Rendering for Empty State or Room Listing */}
             {userRoomList.length === 0 ? (
-                // Import and use EmptyState component
-                <div>
-                    {/* EmptyState component goes here */}
-                    <EmptyState/>
-                </div>
+              <div className="mt-16">
+                {/* Show EmptyState component when there are no room designs */}
+                <EmptyState />
+              </div>
             ) : (
-                <div>
-                    {/* Listing component goes here */}
-                </div>
+              <div className="mt-16">
+                {/* Room listing will be added here when designs exist */}
+              </div>
             )}
+          </div>
         </div>
+      </Layout>
     );
 }
 
