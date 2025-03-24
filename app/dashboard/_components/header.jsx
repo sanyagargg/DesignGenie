@@ -1,5 +1,6 @@
 "use client";  // Since Header component uses React hooks (useContext), mark it as a client component 
 
+import { Button } from '../../../components/ui/button';
 import { UserDetailContext } from '../../__context/UserDetailContext';//fixed import path
 import { UserButton } from '@clerk/nextjs';
 import Image from 'next/image';
@@ -15,6 +16,8 @@ function Header() {
                 <h2 className='font-bold text-lg text-blue-700'>DesignGenie</h2>
             </div>
 
+            {/* Adding variant = ghost -> when u click/hover on the button it'll be greyish */}
+            <Button variant = "ghost" className='rounded-full text-blue-700'>Buy More Credits</Button>
             <div className='flex gap-8 items-center'>
                 <div className='flex gap-2 p-1 items-center bg-slate-100 px-3 rounded-full'>
                     <Image src='/star.svg' width={20} height={20} alt="Credits" />
