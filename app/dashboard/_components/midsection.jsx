@@ -14,13 +14,13 @@ function MidSection() {
 
     return (
       <Layout> {/* Wrap everything inside the Layout component for background effect */}
-        <div className="px-6 pt-14 lg:px-8">
+        <div className="px-6 pt-14 lg:px-8 ">
           {/* 🔹 Header Section */}
-          <div className="py-2">
-            <div className="justify-between items-start mb-16">
+          <div className="py-2 ">
+            <div className="justify-between items-start mb-16 ">
               {/* Display user name */}
               <div className="text-center mb-16">
-                <h1 className="text-4xl font-bold text-blue-800">
+                <h1 className="text-4xl font-bold text-blue-800 ">
                   Welcome, {user?.firstName}
                 </h1>
               </div>

@@ -3,15 +3,16 @@ import React from 'react';
 // This layout acts as a wrapper for all dashboard components and provides a background blur effect
 export default function Layout({ children }) {
   return (
-    <div className="min-h-screen w-full bg-gray-50 overflow-hidden">
+    //min-h-screen w-full bg-gray-50 overflow-hidden (this was removed from the first div to remove the annoying background box)
+    <div>
       {/* 🔹 Top Gradient Blur Effect */}
-      <div className="fixed inset-x-0 top-0 -translate-y-1/2 transform-gpu overflow-hidden blur-3xl z-0">
+      <div className="fixed inset-x-0 top-0 -translate-y-1/2 transform-gpu overflow-hidden blur-3xl z-0 ">
         <div 
           className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[82rem] -translate-x-1/2 rotate-[30deg] 
-                    bg-gradient-to-tr from-purple-600 to-blue-400 opacity-30"
+                    bg-gradient-to-tr from-purple-600 to-blue-400 opacity-25 "
           style={{
-            height: '50vh', // Covers half the viewport height
-            clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 80%)' // Custom shape for the blur
+            height: '40vh', // Covers half the viewport height
+            clipPath: 'polygon(100 0, 100% 0, 100% 100%, 0 80%)' // Custom shape for the blur
           }}
         />
       </div>
@@ -20,10 +21,10 @@ export default function Layout({ children }) {
       <div className="fixed inset-x-0 bottom-0 translate-y-1/2 transform-gpu overflow-hidden blur-3xl z-0">
         <div 
           className="relative left-[calc(50%+11rem)] aspect-[1155/678] w-[82rem] -translate-x-1/2 rotate-[-30deg] 
-                    bg-gradient-to-tr from-purple-600 to-blue-400 opacity-30"
+                    bg-gradient-to-tr from-purple-600 to-blue-400 opacity-50"
           style={{
             height: '50vh', // Covers half the viewport height
-            clipPath: 'polygon(0 20%, 100% 0, 100% 100%, 0 100%)' // Custom shape for the blur
+            clipPath: 'polygon(20 20%, 100% 0, 100% 100%, 0 100%)' // Custom shape for the blur
           }}
         />
       </div>
