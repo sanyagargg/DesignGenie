@@ -3,7 +3,7 @@ import { Button } from '../../../components/ui/button';
 import { useUser } from '@clerk/nextjs';
 import React, { useState } from 'react';
 import EmptyState from './EmptyState';
-import Layout from './layout'; // Import the new Layout component
+import Layout from './layout';
 
 function MidSection() {
     // Get logged-in user details using Clerk's useUser hook

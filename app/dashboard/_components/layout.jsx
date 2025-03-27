@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 // This layout acts as a wrapper for all dashboard components and provides a background blur effect
 export default function Layout({ children }) {
   return (
@@ -21,7 +22,7 @@ export default function Layout({ children }) {
       <div className="fixed inset-x-0 bottom-0 translate-y-1/2 transform-gpu overflow-hidden blur-3xl z-0">
         <div 
           className="relative left-[calc(50%+11rem)] aspect-[1155/678] w-[82rem] -translate-x-1/2 rotate-[-30deg] 
-                    bg-gradient-to-tr from-purple-600 to-blue-400 opacity-50"
+                    bg-gradient-to-tr from-purple-600 to-blue-400 opacity-40"
           style={{
             height: '50vh', // Covers half the viewport height
             clipPath: 'polygon(20 20%, 100% 0, 100% 100%, 0 100%)' // Custom shape for the blur
