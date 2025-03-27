@@ -4,6 +4,10 @@ import ImageUpload from './_components/ImageUpload'
 
 
 function CreateNew() {
+
+  const onHandleInputChange=(value, fieldName)=>{
+    
+  }
   return (
     <Layout>
         <div>
@@ -12,7 +16,7 @@ function CreateNew() {
 
             <div className= 'grid grid-cols-1 md:grid-cols-2 items-center justify-center mt-10'>
             {/* Image Upload Section */}
-            <ImageUpload/>
+            <ImageUpload selectedImage={(value)=>onHandleInputChange(value,'image')} />
             {/* Form input Section */}
 
             </div>
