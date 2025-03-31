@@ -8,11 +8,11 @@ import {
 } from "../../../../@/components/ui/select";
   
 
-function RoomType() {
+function RoomType({selectedRoomType}) {
   return (
     <div>
         <label className='text-blue-800'>Select Room Type*</label>
-        <Select defaultValue="">
+        <Select defaultValue="" onValueChange={(value)=>selectedRoomType(value)}>
             <SelectTrigger className="w-full">
                 <SelectValue placeholder="Room Type" />
             </SelectTrigger>
