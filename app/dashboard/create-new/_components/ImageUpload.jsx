@@ -29,14 +29,14 @@ function ImageUpload(selectedImage) {
           */}
           <div 
             className={`border rounded-xl border-dotted flex justify-center border-purple-400 bg-white 
-                        cursor-pointer hover:shadow-lg ${file ? 'p-0' : 'p-8'}`}
+                        cursor-pointer hover:shadow-lg ${file ? 'p-0' : 'p-8'}  ${file ? '' : 'h-70'} `} // Added h-70 for larger container height`}
           >
             {/* 
               If no file is selected, show default upload image.
               Otherwise, display the uploaded image using URL.createObjectURL(file)
             */}
             {!file ? (
-              <Image src="/imageupload.jpeg" width={150} height={150} alt="default" />
+              <Image src="/imageupload.jpeg" width={150} height={200} alt="default" />
             ) : (
               <Image 
                 src={URL.createObjectURL(file)} // Convert file object to a temporary URL

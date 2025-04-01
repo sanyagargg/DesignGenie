@@ -3,6 +3,7 @@ import React from 'react'
 import Layout from '../_components/layout'
 import ImageUpload from './_components/ImageUpload'
 import RoomType from './_components/RoomType'
+import DesignType from './_components/DesignType'
 
 
 function CreateNew() {
@@ -25,7 +26,7 @@ function CreateNew() {
                 <RoomType selectedRoomType={(value)=>onHandleInputChange(value,'roomType')}/>
 
                 {/*Design Type*/}
-
+                <DesignType selectedDesignType={(value)=>onHandleInputChange(value,'designType')} />
 
                 {/*Additional Requirements TextArea (Optional) */}
 
