@@ -17,7 +17,7 @@ function DesignType({selectedDesignType}) {
     const [selectedOption, setSelectedOption] =useState();
     return (
         <div className='mt-5'>
-            <label className='text-gray-500'>Select Interior Design Type</label>
+            <label className='text-gray-500'>Select Interior Design Type *</label>
             <div className='grid grid-cols-2 mt-3 md:grid-cols-3 lg:grid-cols-4 gap-5'>
                 {Designs.map((design, index) => (
                     //we add an onClick event to this div

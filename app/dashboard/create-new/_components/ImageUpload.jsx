@@ -36,7 +36,7 @@ function ImageUpload(selectedImage) {
               Otherwise, display the uploaded image using URL.createObjectURL(file)
             */}
             {!file ? (
-              <Image src="/imageupload.jpeg" width={150} height={200} alt="default" />
+              <Image src="/imageupload.jpeg" width={150} height={150} alt="default" />
             ) : (
               <Image 
                 src={URL.createObjectURL(file)} // Convert file object to a temporary URL
