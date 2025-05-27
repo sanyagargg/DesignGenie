@@ -10,105 +10,111 @@ import { Button } from "../../../components/ui/button";
 import { supabase } from "../../../lib/supabaseClient";
 
 export default function CreateNew() {
-  // single object to hold all form values
   const [formData, setFormData] = useState({});
 
-  // generic handler: fieldName is one of "image", "roomType", "designType", "additionalReq"
   const onHandleInputChange = (value, fieldName) => {
-    setFormData((prev) => ({
-      ...prev,
-      [fieldName]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [fieldName]: value }));
+    console.log("📝 formData updated:", { ...formData, [fieldName]: value });
   };
 
-  // Step 3: upload the image to Supabase Storage
   const onGenerateImage = async () => {
+    console.log("🔥 onGenerateImage fired with:", formData);
+
+    // 1) Require an image
     if (!formData.image) {
       alert("Please upload an image first.");
       return;
     }
 
-    try {
-      const file = formData.image;
-      const fileName = `${Date.now()}-${file.name}`;
-      const bucket = "user-uploads"; // your actual bucket name
+    // 2) Slugify filename
+    const rawName = formData.image.name.replace(/\s+/g, "_");
+    const fileName = `${Date.now()}-${rawName}`;
+    const bucketName = "user-uploads";
 
-      // upload file
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from(bucket)
-        .upload(fileName, file);
+    // 3) Upload
+    const { data: uploadData, error: uploadErr } =
+      await supabase.storage
+        .from(bucketName)
+        .upload(fileName, formData.image);
 
-      if (uploadError) {
-        console.error("Upload error:", uploadError);
-        alert("Failed to upload image.");
-        return;
-      }
+    if (uploadErr) {
+      console.error("❌ Storage upload error:", uploadErr);
+      alert("Image upload failed.");
+      return;
+    }
+    console.log("✅ Uploaded to Storage:", uploadData);
 
-      // get a public URL for the uploaded file
-      const {
-        data: { publicUrl },
-      } = supabase.storage.from(bucket).getPublicUrl(fileName);
+    // 4) Get public URL
+    const { data: urlData } = supabase.storage
+      .from(bucketName)
+      .getPublicUrl(fileName);
+    const publicUrl = urlData?.publicUrl;
+    console.log("🌐 Public URL:", publicUrl);
 
-      console.log("Public URL:", publicUrl);
+    // 5) Insert into DB
+    const payload = {
+      image_url:          publicUrl,
+      room_type:          formData.roomType,
+      design_type:        formData.designType,
+      additional_request: formData.additionalReq,
+      created_at:         new Date(),
+    };
 
-      // ▶︎ Next: send this URL to your AI API (Replicate)
-      // ▶︎ Then convert the returned AI image URL to base64, store it, etc.
+    const { data: insertData, error: insertErr } =
+      await supabase.from("redesign_requests").insert([payload]);
 
-    } catch (err) {
-      console.error("Unexpected error:", err);
-      alert("Something went wrong.");
+    if (insertErr) {
+      console.error("❌ DB insert error:", insertErr);
+      alert("Saving request to DB failed.");
+    } else {
+      console.log("✅ Saved to DB:", insertData);
+      alert("Your redesign request has been submitted!");
     }
   };
 
   return (
     <Layout>
-      <div className="px-6 pt-14 lg:px-8">
-        <h2 className="text-center mt-2 text-2xl font-bold text-blue-700">
+      {/* Centered Heading */}
+      <div className="text-center py-8">
+        <h2 className="text-3xl font-bold text-blue-800">
           Experience the Magic of AI Remodeling
         </h2>
-        <p className="text-center mt-2 text-gray-600">
-          Transform any room with a click. Save a space, choose a style, and
-          watch as AI instantly reimagines your environment.
+        <p className="mt-2 text-gray-600">
+          Transform any room with a click. Save a space, choose a style, and watch
+          as AI instantly reimagines your environment.
         </p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 mt-10 gap-10">
-          {/* 1. Image Upload */}
-          <ImageUpload
-            selectedImage={(value) => onHandleInputChange(value, "image")}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-6 lg:px-8">
+        {/* 1) Image Upload */}
+        <ImageUpload
+          selectedImage={(v) => onHandleInputChange(v, "image")}
+        />
+
+        {/* 2) Form Inputs */}
+        <div className="space-y-6">
+          <RoomType
+            selectedRoomType={(v) => onHandleInputChange(v, "roomType")}
+          />
+          <DesignType
+            selectedDesignType={(v) => onHandleInputChange(v, "designType")}
+          />
+          <AdditionalReq
+            additionalRequirementInput={(v) =>
+              onHandleInputChange(v, "additionalReq")
+            }
           />
 
-          {/* 2. Form Inputs */}
-          <div className="flex flex-col">
-            <RoomType
-              selectedRoomType={(value) =>
-                onHandleInputChange(value, "roomType")
-              }
-            />
-
-            <DesignType
-              selectedDesignType={(value) =>
-                onHandleInputChange(value, "designType")
-              }
-            />
-
-            <AdditionalReq
-              additionalRequirementInput={(value) =>
-                onHandleInputChange(value, "additionalReq")
-              }
-            />
-
-            {/* 3. Generate Button */}
-            <Button
-              className="w-full mt-5 bg-blue-700 hover:bg-blue-500 text-white"
-              onClick={onGenerateImage}
-            >
-              Generate
-            </Button>
-
-            <p className="text-sm text-gray-700 mt-5">
-              Note: 1 credit will be used to redesign your room.
-            </p>
-          </div>
+          {/* 3) Generate Button */}
+          <Button
+            className="w-full bg-blue-700 hover:bg-blue-500 text-white"
+            onClick={onGenerateImage}
+          >
+            Generate
+          </Button>
+          <p className="text-sm text-gray-700">
+            Note: 1 credit will be used to redesign your room
+          </p>
         </div>
       </div>
     </Layout>
