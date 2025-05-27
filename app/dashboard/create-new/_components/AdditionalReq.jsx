@@ -11,4 +11,4 @@ function AdditionalReq({additionalRequirementInput}) {
   )
 }
 
-export default AdditionalReq
+export default AdditionalReq;
